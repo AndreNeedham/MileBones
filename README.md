@@ -21,10 +21,13 @@ Install C 6.0a.
 Get Windows 3.1 Software Development Kit, again from one of the usual locations.  I chose a CD format here to try to avoid the whole floppy hassle.
 
 Run install\install.exe.
+
 Run c600libs\install.bat, like: install.bat c:\c600\lib c:\c600\include
+
 This installs stuff like slibcew.lib which is needed to build any Windows app.  Why it's not part of install.exe, I don't know.
 
 Reboot, copy all the files from this folder into a folder on your Windows 3.1 machine.
+
 type: nmake
 
 This should hopefully build mb.exe.
