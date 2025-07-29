@@ -10,7 +10,7 @@ This software is provided "as is", without warranty of any kind, express or impl
 
 All the code to build Mile Bones 2.2a for 16-bit Windows is here.
 
-Rough toochain and compile description:
+Rough toolchain and compile description:
 
 Have 86Box running DOS with Windows 3.1.
 
