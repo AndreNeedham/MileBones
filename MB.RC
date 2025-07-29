@@ -1,0 +1,238 @@
+#include "windows.h"
+#include "mb.h"
+
+STRINGTABLE
+BEGIN
+    IDSNAME, "MB"
+    IDSTITLE, "Mile Bones 2.2"
+END
+
+HelpCursor CURSOR help.cur
+mb       ICON    mb.ico
+mbblank  BITMAP LOADONCALL DISCARDABLE  mbblank.bmp
+mb25     BITMAP LOADONCALL DISCARDABLE  mb25.bmp
+mb50     BITMAP LOADONCALL DISCARDABLE  mb50.bmp
+mb75     BITMAP LOADONCALL DISCARDABLE  mb75.bmp
+mb100    BITMAP LOADONCALL DISCARDABLE  mb100.bmp
+mb200    BITMAP LOADONCALL DISCARDABLE  mb200.bmp
+mbgo     BITMAP LOADONCALL DISCARDABLE  mbgo.bmp
+mbstop   BITMAP LOADONCALL DISCARDABLE  mbstop.bmp
+mbeolim  BITMAP LOADONCALL DISCARDABLE  mbeolim.bmp
+mbsplim  BITMAP LOADONCALL DISCARDABLE  mbsplim.bmp
+mbgas    BITMAP LOADONCALL DISCARDABLE  mbgas.bmp
+mbnogas  BITMAP LOADONCALL DISCARDABLE  mbnogas.bmp
+mbstire  BITMAP LOADONCALL DISCARDABLE  mbstire.bmp
+mbftire  BITMAP LOADONCALL DISCARDABLE  mbftire.bmp
+mbrep    BITMAP LOADONCALL DISCARDABLE  mbrep.bmp
+mbacc    BITMAP LOADONCALL DISCARDABLE  mbacc.bmp
+mbpprf   BITMAP LOADONCALL DISCARDABLE  mbpprf.bmp
+mbxtank  BITMAP LOADONCALL DISCARDABLE  mbxtank.bmp
+mbdace   BITMAP LOADONCALL DISCARDABLE  mbdace.bmp
+mbrway   BITMAP LOADONCALL DISCARDABLE  mbrway.bmp
+emb25    BITMAP LOADONCALL DISCARDABLE  emb25.bmp
+emb50    BITMAP LOADONCALL DISCARDABLE  emb50.bmp
+emb75    BITMAP LOADONCALL DISCARDABLE  emb75.bmp
+emb100   BITMAP LOADONCALL DISCARDABLE  emb100.bmp
+emb200   BITMAP LOADONCALL DISCARDABLE  emb200.bmp
+embgo    BITMAP LOADONCALL DISCARDABLE  embgo.bmp
+embstop  BITMAP LOADONCALL DISCARDABLE  embstop.bmp
+embeolim BITMAP LOADONCALL DISCARDABLE  embeolim.bmp
+embsplim BITMAP LOADONCALL DISCARDABLE  embsplim.bmp
+embgas   BITMAP LOADONCALL DISCARDABLE  embgas.bmp
+embnogas BITMAP LOADONCALL DISCARDABLE  embnogas.bmp
+embstire BITMAP LOADONCALL DISCARDABLE  embstire.bmp
+embftire BITMAP LOADONCALL DISCARDABLE  embftire.bmp
+embrep   BITMAP LOADONCALL DISCARDABLE  embrep.bmp
+embacc   BITMAP LOADONCALL DISCARDABLE  embacc.bmp
+embpprf  BITMAP LOADONCALL DISCARDABLE  embpprf.bmp
+embxtank BITMAP LOADONCALL DISCARDABLE  embxtank.bmp
+embdace  BITMAP LOADONCALL DISCARDABLE  embdace.bmp
+embrway  BITMAP LOADONCALL DISCARDABLE  embrway.bmp
+
+MBMenu MENU
+BEGIN
+   POPUP"&Game"
+   BEGIN
+      MENUITEM"&New",IDM_NEWGAME
+      MENUITEM"&Replay same game", IDM_RESTART
+      MENUITEM SEPARATOR
+      MENUITEM"&Load game...", IDM_LOADGAME
+      MENUITEM"&Save game...", IDM_SAVEGAME
+      MENUITEM SEPARATOR
+      MENUITEM"&Current Score...",IDM_SCOREDLG
+      MENUITEM"&High Scores...",IDM_SCORES
+      MENUITEM"&Options...",IDM_OPTIONS
+      MENUITEM SEPARATOR
+      MENUITEM"E&xit",IDM_EXIT
+   END
+   POPUP"&Move"
+   BEGIN
+      MENUITEM"&Undo",IDM_UNDO
+   END
+   POPUP"&Help"
+   BEGIN
+      MENUITEM"&None",IDM_NOHELP
+      MENUITEM"&Beeps",IDM_BEEPS
+      MENUITEM"&Messages",IDM_MSGS
+      MENUITEM SEPARATOR
+      MENUITEM"&Index\tF1",IDM_INDEX
+      MENUITEM SEPARATOR
+      MENUITEM"&About Mile Bones...",IDM_ABOUT
+   END
+END
+
+ABOUTBOX DIALOG LOADONCALL MOVEABLE DISCARDABLE 22, 17, 154, 132
+STYLE WS_CAPTION | WS_SYSMENU | DS_MODALFRAME
+CAPTION "About Mile Bones"
+BEGIN
+    CTEXT "Mile Bones Game"                   -1, 0, 14, 154, 8
+    CTEXT "for Microsoft Windows"             -1, 0,  5, 154, 8
+    CTEXT "Shareware, Version 2.2a"           -1, 0, 34, 154, 8
+    CTEXT "Copyright © 1994 André Needham"    -1, 0, 43, 154, 9
+    DEFPUSHBUTTON "OK",   IDOK, 56, 112, 42, 14, WS_GROUP
+END
+
+MBSCORE DIALOG LOADONCALL MOVEABLE DISCARDABLE 25, 18, 250, 163
+CAPTION "Mile Bones 2.2 - Scoring"
+STYLE WS_CAPTION | WS_SYSMENU | DS_MODALFRAME
+BEGIN
+	   CONTROL "Scoring:", 400, "static", SS_LEFT | WS_CHILD, 16, 8, 224, 8
+	   CONTROL "Value:", 148, "static", SS_LEFT | WS_CHILD, 110, 8, 48, 8
+	   CONTROL "Human:", 146, "static", SS_LEFT | WS_CHILD, 150, 8, 48, 8
+	   CONTROL "Computer:", 147, "static", SS_LEFT | WS_CHILD, 194, 8, 48, 8
+	   CONTROL "Milestones played    ", 401, "static", SS_LEFT | WS_CHILD, 16, 24, 90, 8
+	   CONTROL "Each safety played   ", 402, "static", SS_LEFT | WS_CHILD, 16, 32, 90, 9
+	   CONTROL "All 4 safeties played", 403, "static", SS_LEFT | WS_CHILD, 16, 40, 90, 8
+	   CONTROL "Each coup fourré     ", 404, "static", SS_LEFT | WS_CHILD, 16, 48, 90, 8
+	   CONTROL "Trip completed       ", 405, "static", SS_LEFT | WS_CHILD, 16, 56, 90, 8
+	   CONTROL "Delayed action       ", 406, "static", SS_LEFT | WS_CHILD, 16, 64, 90, 8
+	   CONTROL "Safe trip (no 200s)  ", 407, "static", SS_LEFT | WS_CHILD, 16, 72, 90, 8
+	   CONTROL "Extension            ", 408, "static", SS_LEFT | WS_CHILD, 16, 80, 90, 8
+	   CONTROL "Shutout              ", 409, "static", SS_LEFT | WS_CHILD, 16, 88, 90, 8
+	   CONTROL "Total:", 410, "static", SS_LEFT | WS_CHILD, 16, 104, 90, 8
+	   CONTROL "Grand Total:", 411, "static", SS_LEFT | WS_CHILD, 16, 112, 90, 8
+	   CONTROL " ", 413, "static", SS_CENTER | WS_CHILD, 16, 122, 224, 8
+	   CONTROL "Do you want to play another game?  ", 412, "static", SS_CENTER | WS_CHILD, 16, 130, 224, 8
+	   DEFPUSHBUTTON "&Yes", IDYES, 42, 142, 42, 14
+	   PUSHBUTTON "&No",     IDNO, 101, 142, 42, 14
+	   CONTROL "  x", 115, "static", SS_RIGHT | WS_CHILD, 106, 24, 20, 8
+	   CONTROL "100", 116, "static", SS_RIGHT | WS_CHILD, 106, 32, 20, 8
+	   CONTROL "300", 117, "static", SS_RIGHT | WS_CHILD, 106, 40, 20, 8
+	   CONTROL "300", 118, "static", SS_RIGHT | WS_CHILD, 106, 48, 20, 8
+	   CONTROL "400", 119, "static", SS_RIGHT | WS_CHILD, 106, 56, 20, 8
+	   CONTROL "300", 120, "static", SS_RIGHT | WS_CHILD, 106, 64, 20, 8
+	   CONTROL "300", 121, "static", SS_RIGHT | WS_CHILD, 106, 72, 20, 8
+	   CONTROL "200", 122, "static", SS_RIGHT | WS_CHILD, 106, 80, 20, 8
+	   CONTROL "500", 123, "static", SS_RIGHT | WS_CHILD, 106, 88, 20, 8
+	   CONTROL "  x", 124, "static", SS_RIGHT | WS_CHILD, 150, 24, 20, 8
+	   CONTROL "  x", 125, "static", SS_RIGHT | WS_CHILD, 150, 32, 20, 8
+	   CONTROL "  x", 126, "static", SS_RIGHT | WS_CHILD, 150, 40, 20, 8
+	   CONTROL "  x", 127, "static", SS_RIGHT | WS_CHILD, 150, 48, 20, 8
+	   CONTROL "  x", 128, "static", SS_RIGHT | WS_CHILD, 150, 56, 20, 8
+	   CONTROL "  x", 129, "static", SS_RIGHT | WS_CHILD, 150, 64, 20, 8
+	   CONTROL "  x", 130, "static", SS_RIGHT | WS_CHILD, 150, 72, 20, 8
+	   CONTROL "  x", 131, "static", SS_RIGHT | WS_CHILD, 150, 80, 20, 8
+	   CONTROL "  x", 132, "static", SS_RIGHT | WS_CHILD, 150, 88, 20, 8
+	   CONTROL "  x", 133, "static", SS_RIGHT | WS_CHILD, 194, 24, 20, 8
+	   CONTROL "  x", 134, "static", SS_RIGHT | WS_CHILD, 194, 32, 20, 8
+	   CONTROL "  x", 135, "static", SS_RIGHT | WS_CHILD, 194, 40, 20, 8
+	   CONTROL "  x", 136, "static", SS_RIGHT | WS_CHILD, 194, 48, 20, 8
+	   CONTROL "  x", 137, "static", SS_RIGHT | WS_CHILD, 194, 56, 20, 8
+	   CONTROL "  x", 138, "static", SS_RIGHT | WS_CHILD, 194, 64, 20, 8
+	   CONTROL "  x", 139, "static", SS_RIGHT | WS_CHILD, 194, 72, 20, 8
+	   CONTROL "  x", 140, "static", SS_RIGHT | WS_CHILD, 194, 80, 20, 8
+	   CONTROL "  x", 141, "static", SS_RIGHT | WS_CHILD, 194, 88, 20, 8
+	   CONTROL "  x", 142, "static", SS_RIGHT | WS_CHILD, 150, 104, 20, 8
+	   CONTROL "  x", 143, "static", SS_RIGHT | WS_CHILD, 194, 104, 20, 8
+	   CONTROL "  x", 144, "static", SS_RIGHT | WS_CHILD, 150, 112, 20, 8
+	   CONTROL "  x", 145, "static", SS_RIGHT | WS_CHILD, 194, 112, 20, 8
+END
+
+MBHISCORE DIALOG LOADONCALL MOVEABLE DISCARDABLE 13, 28, 195, 118
+CAPTION "Mile Bones 2.2 - High Scores"
+STYLE WS_CAPTION | WS_SYSMENU | DS_MODALFRAME 
+BEGIN
+    DEFPUSHBUTTON "OK", IDYES, 13, 100, 50, 14
+    PUSHBUTTON "Clear Scores", IDNO, 73, 100, 50, 14
+    CONTROL "Highest scoring round:", 102, "static", SS_LEFT | WS_CHILD, 4, 5, 84, 8
+    CONTROL "1.", 103, "static", SS_LEFT | WS_CHILD, 10, 16, 11, 8
+    CONTROL "2.", 104, "static", SS_LEFT | WS_CHILD, 10, 26, 11, 8
+    CONTROL "3.", 105, "static", SS_LEFT | WS_CHILD, 10, 36, 11, 8
+    CONTROL "Text", 110, "static", SS_RIGHT | WS_CHILD, 30, 16, 20, 8
+    CONTROL "Text", 111, "static", SS_RIGHT | WS_CHILD, 30, 26, 20, 8
+    CONTROL "Text", 112, "static", SS_RIGHT | WS_CHILD, 30, 36, 20, 8
+    CONTROL "Text", 113, "static", SS_LEFT | WS_CHILD, 60, 16, 120, 8
+    CONTROL "Text", 114, "static", SS_LEFT | WS_CHILD, 60, 26, 120, 8
+    CONTROL "Text", 115, "static", SS_LEFT | WS_CHILD, 60, 36, 120, 8
+    CONTROL "Highest point spread:", 106, "static", SS_LEFT | WS_CHILD, 5, 49, 86, 8
+    CONTROL "1.", 107, "static", SS_LEFT | WS_CHILD, 10, 61, 11, 8
+    CONTROL "2.", 108, "static", SS_LEFT | WS_CHILD, 10, 71, 11, 8
+    CONTROL "3.", 109, "static", SS_LEFT | WS_CHILD, 10, 81, 11, 8
+    CONTROL "Text", 116, "static", SS_RIGHT | WS_CHILD, 30, 61, 20, 8
+    CONTROL "Text", 117, "static", SS_RIGHT | WS_CHILD, 30, 71, 20, 8
+    CONTROL "Text", 118, "static", SS_RIGHT | WS_CHILD, 30, 81, 20, 8
+    CONTROL "Text", 119, "static", SS_LEFT | WS_CHILD, 60, 61, 120, 8
+    CONTROL "Text", 120, "static", SS_LEFT | WS_CHILD, 60, 71, 120, 8
+    CONTROL "Text", 121, "static", SS_LEFT | WS_CHILD, 60, 81, 120, 8
+END
+
+MBOPTIONS DIALOG LOADONCALL MOVEABLE DISCARDABLE 65, 42, 180, 106
+CAPTION "Mile Bones 2.2 - Options"
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU | DS_MODALFRAME
+BEGIN
+    DEFPUSHBUTTON "OK", IDOK, 130, 5, 42, 14
+    PUSHBUTTON "Cancel", IDCANCEL, 130, 23, 42, 14 
+    CONTROL "&Method for playing a card:", 104, "button", BS_GROUPBOX | WS_CHILD, 5, 4, 120, 40
+    CONTROL "&Drag and drop", 102, "button", BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP | WS_CHILD, 11, 14, 105, 12
+    CONTROL "&Click card, click where to drop", 103, "button", BS_AUTORADIOBUTTON  | WS_CHILD, 11, 26, 108, 12
+    CONTROL "&Auto-sort your cards", 105, "button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_CHILD, 5, 48, 109, 12
+    CONTROL "D&isable name input on startup", 106, "button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_CHILD, 5, 62, 109, 12
+    CONTROL "D&efault name:", 107, "static", SS_LEFT | WS_CHILD, 5, 76, 96, 12
+    CONTROL "noname", 108, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD, 11, 90, 153, 12
+END
+
+MBHELP DIALOG LOADONCALL MOVEABLE DISCARDABLE 45, 42, 187, 51
+CAPTION "Mile Bones 2.2 - Help Message"
+STYLE WS_BORDER | WS_CAPTION | WS_SYSMENU | DS_MODALFRAME
+BEGIN
+    CONTROL " ", 100, "static", SS_CENTER | WS_CHILD, 8, 7, 171, 8
+    CONTROL " ", 101, "static", SS_CENTER | WS_CHILD, 8, 16, 171, 8
+    DEFPUSHBUTTON "OK", IDOK, 72, 30, 42, 14
+END
+
+MBNAME DIALOG LOADONCALL MOVEABLE DISCARDABLE 45, 42, 187, 54
+CAPTION "Mile Bones 2.2 - Who are you?"
+STYLE WS_CAPTION | WS_SYSMENU | DS_MODALFRAME
+BEGIN
+    CONTROL "Please enter your name:", 100, "static", SS_LEFT | WS_CHILD, 8, 6, 171, 8
+    CONTROL "noname", 101, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD, 8, 16, 171, 12
+    DEFPUSHBUTTON "OK", IDOK, 39, 36, 42, 14
+END
+
+MBSAVE DIALOG LOADONCALL MOVEABLE DISCARDABLE 69, 31, 191, 85
+CAPTION "Save game as..."
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | DS_MODALFRAME | WS_POPUP
+BEGIN
+    CONTROL "File&name:", 100, "static", SS_LEFT | WS_GROUP | WS_CHILD, 7, 7, 40, 8
+    CONTROL "1.mbg", 101, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD , 51, 5, 71, 12
+    CONTROL "Current directory:", 104, "static", SS_LEFT | WS_GROUP | WS_CHILD, 72, 54, 97, 8
+    CONTROL "&Directories:", 102, "static", SS_LEFT | WS_GROUP | WS_CHILD, 7, 20, 53, 8
+    CONTROL "Text", 103, "listbox", LBS_NOTIFY | LBS_SORT | LBS_STANDARD | WS_BORDER | WS_VSCROLL | WS_CHILD | WS_TABSTOP, 7, 31, 59, 49
+    DEFPUSHBUTTON "OK",  IDOK,     142, 5, 41, 14
+    PUSHBUTTON "Cancel", IDCANCEL, 142, 23, 41, 14
+    CONTROL " ", 107, "static", SS_LEFT |WS_GROUP | WS_CHILD, 72, 64, 110, 9
+END
+
+MBLOAD DIALOG LOADONCALL MOVEABLE DISCARDABLE 69, 31, 191, 85
+CAPTION "Load game..."
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | DS_MODALFRAME | WS_POPUP
+BEGIN
+    CONTROL "File&name:", 100, "static", SS_LEFT | WS_GROUP | WS_CHILD, 7, 7, 40, 8
+    CONTROL "*.mbg", 101, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP | WS_CHILD , 51, 5, 71, 12
+    CONTROL "Current directory:", 104, "static", SS_LEFT | WS_GROUP | WS_CHILD, 72, 54, 97, 8
+    CONTROL "&Directories:", 102, "static", SS_LEFT | WS_GROUP | WS_CHILD, 7, 20, 53, 8
+    CONTROL "Text", 103, "listbox", LBS_NOTIFY | LBS_SORT | LBS_STANDARD | WS_BORDER | WS_VSCROLL | WS_CHILD | WS_TABSTOP, 7, 31, 59, 49
+    DEFPUSHBUTTON "OK",  IDOK,     142, 5, 41, 14
+    PUSHBUTTON "Cancel", IDCANCEL, 142, 23, 41, 14
+    CONTROL " ", 107, "static", SS_LEFT |WS_GROUP | WS_CHILD, 72, 64, 110, 9
+END

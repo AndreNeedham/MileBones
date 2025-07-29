@@ -1,0 +1,19 @@
+NAME    MB
+DESCRIPTION 'Mile Bones 2.2'
+EXETYPE WINDOWS
+STUB    'WINSTUB.EXE'
+CODE    PRELOAD MOVEABLE
+DATA    PRELOAD MOVEABLE MULTIPLE
+HEAPSIZE  5120
+STACKSIZE 8192
+EXPORTS
+    MBWndProc    @1
+    About        @2
+    MBScore      @3
+    MBHelp       @4
+    ContextHelp  @5
+    MBHiScore    @6
+    MBOptions    @7
+    MBInfoWndProc @8
+    MBSave       @9
+    MBLoad       @10

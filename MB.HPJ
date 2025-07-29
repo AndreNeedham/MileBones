@@ -1,0 +1,50 @@
+[OPTIONS]
+INDEX=index
+TITLE=Mile Bones 2.2
+COMPRESS=false
+WARNING=1  
+[FILES]
+mbindex.rtf  ; index
+mbhelp.rtf   ; topics
+[BITMAPS]
+mb25.bmp
+mb50.bmp
+mb75.bmp
+mb100.bmp
+mb200.bmp
+mbgo.bmp
+mbeolim.bmp
+mbrep.bmp
+mbgas.bmp
+mbstire.bmp
+mbftire.bmp
+mbnogas.bmp
+mbsplim.bmp
+mbstop.bmp
+mbacc.bmp
+mbrway.bmp
+mbxtank.bmp
+mbdace.bmp
+mbpprf.bmp
+
+[MAP]
+endgame         600
+hiscore         601
+login           602
+options         603
+loadgame        604
+savegame        605
+extension       500
+battle          701
+speedlim        702
+safeties        703
+mileage         704
+draw            705
+myhand          706
+discard         707
+cbattle         708
+cspeedlim       709
+csafeties       710
+cmileage        711
+
+

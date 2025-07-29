@@ -1,0 +1,25 @@
+#  The C File List
+
+all: mb.exe
+mb.obj: mb.c mb.h
+    cl -c -AS -Gsw -Os -G2 -Zpe mb.c
+ 
+mbcore.obj: mbcore.c mb.h
+    cl -c -AS -Gsw -Os -G2 -Zpe mbcore.c
+
+mbdlg.obj: mbdlg.c mb.h
+    cl -c -AS -Gsw -Os -G2 -Zpe mbdlg.c
+
+mbcomp.obj: mbcomp.c mb.h
+    cl -c -AS -Gsw -Os -G2 -Zpe mbcomp.c
+
+mbplayer.obj: mbplayer.c mb.h
+    cl -c -AS -Gsw -Os -G2 -Zpe mbplayer.c
+
+mb.res: mb.rc mb.ico mb.h mbblank.bmp mb25.bmp mb50.bmp mb75.bmp mb100.bmp mb200.bmp mbgo.bmp mbstop.bmp mbeolim.bmp mbsplim.bmp mbgas.bmp mbnogas.bmp mbstire.bmp mbftire.bmp mbrep.bmp mbacc.bmp mbpprf.bmp mbxtank.bmp mbdace.bmp mbrway.bmp \
+emb25.bmp emb50.bmp emb75.bmp emb100.bmp emb200.bmp embgo.bmp embstop.bmp embeolim.bmp embsplim.bmp embgas.bmp embnogas.bmp embstire.bmp embftire.bmp embrep.bmp embacc.bmp embpprf.bmp embxtank.bmp embdace.bmp embrway.bmp
+    rc -r mb.rc mb.res
+
+mb.exe: mb.obj mbcore.obj mbdlg.obj mbcomp.obj mbplayer.obj mb.def mb.res
+    link /NOD mb+mbcore+mbdlg+mbcomp+mbplayer,,, libw slibcew, mb.def
+    rc mb.res
