@@ -1,6 +1,6 @@
 # MileBones
 Source code for 1990's-era 16-bit Windows card game Mile Bones 2.2a
-(c) 1991 André Needham
+(c) 1994 André Needham
 
 Permission is granted to use, copy, and distribute this code for educational and historical purposes only. Commercial use is strictly prohibited.
 
