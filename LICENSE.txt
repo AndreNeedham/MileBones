@@ -1,4 +1,4 @@
-Copyright (c) 1991 André Needham
+Copyright (c) 1994 André Needham
 
 Permission is granted to use, copy, and distribute this code for educational and historical purposes only. Commercial use is strictly prohibited.
 
