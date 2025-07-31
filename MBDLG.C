@@ -70,9 +70,9 @@ BOOL FAR PASCAL MBHiScore(HWND hDlg, unsigned message, WORD wParam, LONG lParam 
 		EndDialog(hDlg,TRUE);
 	    break;
 
-//	    case IDHELP:
-//		WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
-//	    break;
+	  case IDHELP:
+	      WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
+	  break;
 
 	      case  IDNO: // clear scores button
 		 for(i=0; i<3; i++)
@@ -145,10 +145,10 @@ BOOL FAR PASCAL MBName(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 		   return TRUE;
 	       break;
 
-//	    case IDHELP:
-//		WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
-//		return FALSE;
-//	    break;
+	  case IDHELP:
+	      WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
+	      return FALSE;
+	  break;
 
 	       default:
 		  return FALSE;
@@ -200,7 +200,7 @@ BOOL FAR PASCAL MBOptions(HWND hDlg, unsigned message, WORD wParam,
        SendDlgItemMessage(hDlg, 106, BM_SETCHECK, (WORD)bnoname, (LONG)0);
 
        GetPrivateProfileString((LPSTR)"Options", (LPSTR)"DefName",
-          (LPSTR)"noname", (LPSTR)szDefName, 31, (LPSTR)szIniFile);               
+	  (LPSTR)"noname", (LPSTR)szDefName, 31, (LPSTR)szIniFile);               
        SetDlgItemText(hDlg, 108, szDefName);
        SendDlgItemMessage(hDlg, 108, EM_LIMITTEXT,  (WORD)31, (DWORD)0); 
        EnableWindow(GetDlgItem(hDlg,108),bNoLogon); 
@@ -231,18 +231,18 @@ BOOL FAR PASCAL MBOptions(HWND hDlg, unsigned message, WORD wParam,
 
 	  case 106:  //disable name input
 	     bnoname = SendDlgItemMessage(hDlg, 106, BM_GETCHECK, (WORD)0, (LONG)0);
-             EnableWindow(GetDlgItem(hDlg,108),bnoname); 
+	     EnableWindow(GetDlgItem(hDlg,108),bnoname); 
 	     return TRUE;
 	  break;
 
-//	  case IDHELP:
-//	      WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
-//	  break;
+	case IDHELP:
+	    WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
+	break;
 
 	  case IDOK:
 	     bDragDrop = btmp;
 	     bSortCards = bsort;
-             bNoLogon = bnoname;
+	     bNoLogon = bnoname;
 
 	     lstrcpy(szOutStr, bSortCards ? ("1"):("0"));
 	     WritePrivateProfileString((LPSTR)"Options",
@@ -256,17 +256,17 @@ BOOL FAR PASCAL MBOptions(HWND hDlg, unsigned message, WORD wParam,
 	     WritePrivateProfileString((LPSTR)"Options",
 		(LPSTR)"NoLogon", (LPSTR)szOutStr, (LPSTR)szIniFile);
 
-             if(bNoLogon)
-               {
-	        nchars=GetDlgItemText(hDlg, 108, (LPSTR)szDefName, 32);
-	        if(nchars == 0) lstrcpy((LPSTR)szDefName, "noname"); 
-	        WritePrivateProfileString((LPSTR)"Options",
+	     if(bNoLogon)
+	       {
+		nchars=GetDlgItemText(hDlg, 108, (LPSTR)szDefName, 32);
+		if(nchars == 0) lstrcpy((LPSTR)szDefName, "noname"); 
+		WritePrivateProfileString((LPSTR)"Options",
 		   (LPSTR)"DefName", (LPSTR)szDefName, (LPSTR)szIniFile);               
-                lstrcpy(UserName,szDefName);
-                InvalidateRect(hWndMain,NULL,FALSE);
-               }
+		lstrcpy(UserName,szDefName);
+		InvalidateRect(hWndMain,NULL,FALSE);
+	       }
 
-          //fall through
+	  //fall through
 	  case IDCANCEL:
 	     helpcode = 0;
 	     EndDialog(hDlg, TRUE);
@@ -345,7 +345,7 @@ BOOL FAR PASCAL MBSave(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 
       case WM_INITDIALOG:
 	 getdir = FALSE;
-         helpcode = 605;
+	 helpcode = 605;
 	 GetModuleFileName(hInst, (LPSTR)szBaseName, 80);
 	 lstrcpy((LPSTR)szTmpName,(LPSTR)"1.mbg");
 	 lpTemp = (LPSTR)szBaseName;
@@ -363,7 +363,7 @@ BOOL FAR PASCAL MBSave(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 	 switch(wParam)
 	   {
 	    case 100:
-	    case 101:	
+	    case 101:   
 	    break;
 
 	    case 102:
@@ -424,12 +424,12 @@ BOOL FAR PASCAL MBSave(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 		 }
 	    break;
 
-//	    case IDHELP:
-//	       WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
-//	    break;
+	  case IDHELP:
+	     WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
+	  break;
 
 	    case IDOK:
-               GetDlgItemText(hDlg, 101, (LPSTR)szTmpName, 79);
+	       GetDlgItemText(hDlg, 101, (LPSTR)szTmpName, 79);
 	       lstrcat((LPSTR)szBaseName, (LPSTR)szTmpName);
 
 	       hOutFile = _lcreat((LPSTR)szBaseName, 0);
@@ -476,7 +476,7 @@ BOOL FAR PASCAL MBLoad(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 
       case WM_INITDIALOG:
 	 getdir = FALSE;
-         helpcode = 604;
+	 helpcode = 604;
 	 GetModuleFileName(hInst, (LPSTR)szBaseName, 80);
 	 lstrcpy((LPSTR)szTmpName,(LPSTR)"*.mbg");
 	 lpTemp = (LPSTR)szBaseName;
@@ -494,7 +494,7 @@ BOOL FAR PASCAL MBLoad(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 	 switch(wParam)
 	   {
 	    case 100:
- 	    case 101:
+	    case 101:
 	    break;
 
 	    case 102:
@@ -505,11 +505,11 @@ BOOL FAR PASCAL MBLoad(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 	    case 103:
 	       switch(HIWORD(lParam))
 		 {
-                  case LBN_SELCHANGE:
+		  case LBN_SELCHANGE:
 		     DlgDirSelectEx(hDlg,(LPSTR)szFileName,sizeof(szFileName),103);
-                     if((szFileName[1]!=':') && (szFileName[0]!='.'))
-                       {
-                        //if it's a filename, display in the edit box
+		     if((szFileName[1]!=':') && (szFileName[0]!='.'))
+		       {
+			//if it's a filename, display in the edit box
 			lpTemp = (LPSTR)szFileName;
 			while (*lpTemp != '\0')lpTemp++; /* find end */
 			while (*lpTemp != '.')lpTemp--; /* back up to . */
@@ -517,8 +517,8 @@ BOOL FAR PASCAL MBLoad(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 
 			if(lstrcmp((LPSTR)lpTemp,"mbg")==0)
 			   SetDlgItemText(hDlg, 101, (LPSTR)szFileName);
-                       }
-                  break;
+		       }
+		  break;
 
 		  case LBN_DBLCLK:
 		     DlgDirSelectEx(hDlg,(LPSTR)szFileName,sizeof(szFileName),103);
@@ -554,7 +554,7 @@ BOOL FAR PASCAL MBLoad(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 			   //szBaseName must be a filename
 			   SetDlgItemText(hDlg, 101, (LPSTR)szFileName);
 			   SendMessage(hDlg, WM_COMMAND,IDOK,
-                              MAKELONG(GetDlgItem(hDlg,IDOK),BN_CLICKED));
+			      MAKELONG(GetDlgItem(hDlg,IDOK),BN_CLICKED));
 			   return TRUE; 
 			  }
 			lstrcat((LPSTR)szBaseName, (LPSTR)szFileName);
@@ -582,23 +582,23 @@ BOOL FAR PASCAL MBLoad(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 		 }
 	    break;
 
-//	    case IDHELP:
-//	       WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
-//	    break;
+	  case IDHELP:
+	     WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
+	  break;
 
 	    case IDOK:
 	       GetDlgItemText(hDlg, 101, (LPSTR)szTmpName, 13);
-               //save base path in case load fails
-               lstrcpy((LPSTR)szFileName, (LPSTR)szBaseName);
+	       //save base path in case load fails
+	       lstrcpy((LPSTR)szFileName, (LPSTR)szBaseName);
 	       lstrcat((LPSTR)szBaseName, (LPSTR)szTmpName);
 	       hInFile = _lopen((LPSTR)szBaseName,OF_READ);
 	       if(hInFile == -1)
-                 {
+		 {
 		  MessageBox(hDlg, (LPSTR)szBaseName, "Can't open this file:", MB_OK);
-                  lstrcpy((LPSTR)szBaseName, (LPSTR)szFileName);
-                  return TRUE;
-                 }		 
-               _lread(hInFile, (LPSTR)szHeader,4);  //file header
+		  lstrcpy((LPSTR)szBaseName, (LPSTR)szFileName);
+		  return TRUE;
+		 }               
+	       _lread(hInFile, (LPSTR)szHeader,4);  //file header
 	       if(lstrcmp((LPSTR)szHeader, (LPSTR)"MB22")==0)  //file OK
 		 {
 		  _lread(hInFile, (LPSTR)&deck[0], 202);
@@ -606,15 +606,15 @@ BOOL FAR PASCAL MBLoad(HWND hDlg, unsigned message, WORD wParam, LONG lParam)
 		  _lread(hInFile, (LPSTR)UserName, 40);
 		 }
 	       else 
-                 {
-                  MessageBox(hDlg, "This file is not a saved game.", "MB 2.2", MB_OK);
-                  lstrcpy((LPSTR)szBaseName, (LPSTR)szFileName);
-                  return TRUE;
-                 }	       
-               _lclose(hInFile);
+		 {
+		  MessageBox(hDlg, "This file is not a saved game.", "MB 2.2", MB_OK);
+		  lstrcpy((LPSTR)szBaseName, (LPSTR)szFileName);
+		  return TRUE;
+		 }             
+	       _lclose(hInFile);
 	       UndoLastMove(TRUE); 
 	       InvalidateRect(hWndMain, NULL, TRUE);
-               EndDialog(hDlg, TRUE);
+	       EndDialog(hDlg, TRUE);
 	       return TRUE;
 	    break;
 

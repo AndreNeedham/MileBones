@@ -2,7 +2,7 @@
 #define IDSNAME      100
 #define IDSABOUT     200
 #define IDSTITLE     300
-//#define IDHELP       399
+#define IDHELP       399
 #define IDM_NEWGAME  103
 #define IDM_NOHELP   104
 #define IDM_BEEPS    105

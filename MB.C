@@ -35,7 +35,7 @@ other files:
 	       BOOL    MBHiScore(...)
 	       BOOL    MBOptions(...)
 	       BOOL    MBSave(...)
-               BOOL    MBLoad(...)
+	       BOOL    MBLoad(...)
 */
 #include <windows.h>
 #include <stdio.h>
@@ -66,7 +66,7 @@ HANDLE  hInst;
 POINT   dragpt, dragoffset;
 static FARPROC lpprocAbout, lpprocHelp, lpprocScore, lpprocF1,
 	       lpprocHiScore, lpprocName, lpprocOptions,
-               lpprocSave, lpprocLoad;
+	       lpprocSave, lpprocLoad;
 HBITMAP hBitmap[20], hDragBitmap, hBackBitmap, hDragmap;
 HDC     hDragDC, hBackDC;
 HCURSOR hHelpCursor;
@@ -254,10 +254,10 @@ BOOL FAR PASCAL MBScore(HWND hDlg, unsigned message, WORD wParam,
 	       }
 	  break;
  
-//	      case IDHELP:
-//	      WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
-//		  return TRUE;
-//	      break;
+	    case IDHELP:
+	    WinHelp(hDlg, szHelpFile, HELP_CONTEXT, (DWORD)helpcode);
+		return TRUE;
+	    break;
 
 	  default:
 	     if (gameover > 0) 
@@ -550,7 +550,7 @@ int PASCAL WinMain(HANDLE hInstance, HANDLE hPrevInstance,
     if(bNoLogon)  //if no logon screen, get default user name
       {
        GetPrivateProfileString((LPSTR)"Options", (LPSTR)"DefName",
-          (LPSTR)"noname", (LPSTR)UserName, 31, (LPSTR)szIniFile);               
+	  (LPSTR)"noname", (LPSTR)UserName, 31, (LPSTR)szIniFile);               
       }
     ShowWindow(hWnd,cmdShow);
     if (mousein == 0) ShowCursor(1);
@@ -868,7 +868,7 @@ MB_YESNO | MB_DEFBUTTON2) == IDYES)
        break;
 
        case IDM_SAVEGAME:
-          if (gameover != -1)  //don't save completed game
+	  if (gameover != -1)  //don't save completed game
 	  DialogBox(hInst, MAKEINTRESOURCE(MBSAVE), hWnd, lpprocSave);
        break;
 

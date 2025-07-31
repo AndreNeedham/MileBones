@@ -20,6 +20,10 @@ mb.res: mb.rc mb.ico mb.h mbblank.bmp mb25.bmp mb50.bmp mb75.bmp mb100.bmp mb200
 emb25.bmp emb50.bmp emb75.bmp emb100.bmp emb200.bmp embgo.bmp embstop.bmp embeolim.bmp embsplim.bmp embgas.bmp embnogas.bmp embstire.bmp embftire.bmp embrep.bmp embacc.bmp embpprf.bmp embxtank.bmp embdace.bmp embrway.bmp
     rc -r mb.rc mb.res
 
-mb.exe: mb.obj mbcore.obj mbdlg.obj mbcomp.obj mbplayer.obj mb.def mb.res
+mb.hlp: mb.hpj mbhelp.rtf mbindex.rtf
+    hc mb.hpj
+
+mb.exe: mb.obj mbcore.obj mbdlg.obj mbcomp.obj mbplayer.obj mb.def mb.res mb.hlp
     link /NOD mb+mbcore+mbdlg+mbcomp+mbplayer,,, libw slibcew, mb.def
     rc mb.res
+
