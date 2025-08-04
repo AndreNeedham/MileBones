@@ -35,8 +35,6 @@ This should hopefully build mb.exe.
 Other notes:
 The code is probably also buildable under c5.1 and Windows 3.0 SDK, but I didn't try that.
 
-The original game had context-sensitive help but I commented anything involving that out.  I had to recreate the makefile for Mile Bones from scratch since I'd lost it, and didn't want to figure out the help compiler stuff all over again.
-
 Back in the mid-'90s I swear I had code to build this under a Win32 environment but I've apparently lost that.  I likely won't waste time re-converting it since it was kind of a pain.  Just run an ancient version of Windows in 86Box and run the game there.
 
 Andre
